@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package blockless;
+
+message FunctionManifest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  Function function = 4;
+  Deployment deployment = 5;
+  Runtime runtime = 6;
+  bool cached = 7;
+  repeated google.protobuf.Any hooks = 8;
+  string fs_root_path = 9;
+  string entry = 10;
+  string content_type = 11;
+  repeated string permissions = 12;
+  string drivers_root_path = 13;
+  uint32 limited_fuel = 14;
+  uint32 limited_memory = 15;
+}
+
+message Runtime {
+  string checksum = 1;
+  string url = 2;
+}
+
+message Function {
+  string id = 1;
+  string name = 2;
+  string version = 3;
+  string runtime = 4;
+  repeated string extensions = 5;
+}
+
+message Deployment {
+  string cid = 1;
+  string checksum = 2;
+  string uri = 3;
+  repeated Methods methods = 4;
+  string aggregation = 5;
+  int32 nodes = 6;
+  string file = 7;
+}
+
+message Methods {
+  string name = 1;
+  string entry = 2;
+  repeated Parameter arguments = 3;
+  repeated Parameter envvars = 4;
+  string result_type = 5;
+}
+
+message Parameter {
+  string name = 1;
+  string value = 2;
+}
